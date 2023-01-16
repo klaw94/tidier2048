@@ -229,6 +229,7 @@ public class SecondCopy extends JFrame implements ActionListener {
     private void moveCells(char direction) {
         int newX = 0;
         int newY = 0;
+        //This determines the direction in which we are gonna move the loop. We loop in that direction and call moveCell in every single cell.
         for (int y = 0; y < cells.length; y++) {
             for (int x = 0; x < cells.length; x++) {
                 if (direction == 'L') {
@@ -258,8 +259,12 @@ public class SecondCopy extends JFrame implements ActionListener {
 
     private void moveSingleCell(char direction, int y, int x) {
         int newX, newY;
+        //The cell is only doing the moving if it is not empty.
         if (cells[y][x] != 0) {
             for (int i = 0; i < cells.length; i++) {
+                //This is "L"
+                //If it is not empty, we loop through the rest of the row/column. The direction of the
+                // loop depends on the direction of the movement
                 newX = i;
                 newY = y;
                 if (direction == 'R') {
@@ -274,10 +279,13 @@ public class SecondCopy extends JFrame implements ActionListener {
                 }
 
                 if (!cellLabels[newY][newX].getText().equals(" ") && newX == x && newY == y) {
+                    //We stop when we arrive to the cell that we are moving.
                     break;
                 } else if (cellLabels[newY][newX].getText().equals(" ")) {
+                    //The cell gets the value visually and numerically.
                     cellLabels[newY][newX].setText("" + cells[y][x]);
                     cells[newY][newX] = cells[y][x];
+                    //The cell that we are moving is reset to 0 and empty.
                     cells[y][x] = 0;
                     cellLabels[y][x].setText(" ");
                     didIMove = true;
